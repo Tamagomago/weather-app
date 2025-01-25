@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <title>Weather App - Real-Time Forecasts</title>
+    <link href="style.css" rel="stylesheet" />
+    <link
+      href="assets/app-icon/weather-app-icon.png"
+      rel="icon"
+      type="image/x-icon"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="video-background">
+      <div class="video-overlay"></div>
+      <video
+        autoplay
+        loop
+        muted
+        src="assets/background/clear-day.MP4"
+        typeof="video/mp4"
+      ></video>
+      <main class="weather-app">
+        <div class="weather-container">
+          <header class="weather-header">
+            <label class="location-input-label" for="location-input">
+              <span>Right now in </span>
+              <input id="location-input" type="text" />
+              <span id="current-weather-description">, it's clear.</span>
+            </label>
+          </header>
+          <section class="weather-overview">
+            <div class="weather-icon">
+              <img
+                alt="clear-day"
+                id="weather-icon-svg"
+                src="assets/weather-icons/production/fill/svg/clear-day.svg"
+              />
+            </div>
+            <div class="weather-temperature">
+              <h1 class="temperature-primary weather-data">--</h1>
+              <h1 class="temperature-secondary weather-data">--</h1>
+            </div>
+            <div class="weather-details">
+              <div class="detail-item wind">
+                <svg
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <symbol id="wind-symbol" viewBox="0 0 348 240">
+                      <path
+                        d="M267.2 24.3A40 40 0 11296 92H12"
+                        fill="none"
+                        stroke="rgba(255, 255, 255, 0.6)"
+                        stroke-dasharray="148"
+                        stroke-linecap="round"
+                        stroke-miterlimit="10"
+                        stroke-width="24"
+                      >
+                        <animate
+                          attributeName="stroke-dashoffset"
+                          dur="6s"
+                          repeatCount="indefinite"
+                          values="0; 2960"
+                        />
+                      </path>
+                      <path
+                        d="M151.2 215.7A40 40 0 10180 148H12"
+                        fill="none"
+                        stroke="rgba(255, 255, 255, 0.6)"
+                        stroke-dasharray="110"
+                        stroke-linecap="round"
+                        stroke-miterlimit="10"
+                        stroke-width="24"
+                      >
+                        <animate
+                          attributeName="stroke-dashoffset"
+                          dur="6s"
+                          repeatCount="indefinite"
+                          values="0; 1540"
+                        />
+                      </path>
+                    </symbol>
+                  </defs>
+                  <use
+                    height="240"
+                    transform="translate(82 136)"
+                    width="348"
+                    xlink:href="#wind-symbol"
+                  />
+                </svg>
+                <h1 class="weather-data" id="wind-speed-direction">--</h1>
+              </div>
+              <div class="detail-item humidity">
+                <svg
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <defs>
+                    <symbol id="humidity-icon" viewBox="0 0 164 245.6">
+                      <path
+                        d="M82 3.6c-48.7 72-80 117-80 160.7s35.8 79.3 80 79.3 80-35.5 80-79.3S130.7 75.5 82 3.6Z"
+                        fill="rgba(255, 255, 255, 0.6)"
+                        stroke="rgba(255, 255, 255, 0.6)"
+                        stroke-miterlimit="10"
+                        stroke-width="4"
+                      >
+                        <animateTransform
+                          additive="sum"
+                          attributeName="transform"
+                          calcMode="spline"
+                          dur="3s"
+                          keySplines=".42, 0, .58, 1; .42, 0, .58, 1"
+                          repeatCount="indefinite"
+                          type="scale"
+                          values="1 1; 1 .9; 1 1"
+                        />
+                      </path>
+                    </symbol>
+                  </defs>
+                  <use
+                    height="245.6"
+                    transform="translate(173.9 133.01)"
+                    width="164"
+                    xlink:href="#humidity-icon"
+                  />
+                </svg>
+                <h1 class="weather-data" id="humidity-percentage">--</h1>
+              </div>
+              <div class="detail-item pressure">
+                <svg
+                  class="active-pressure-icon"
+                  id="high-pressure-icon"
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M293.5 213a7.7 7.7 0 01-5.3-2L256 180.1 223.8 211a7.8 7.8 0 01-10.6 0 6.9 6.9 0 010-10l37.5-35.8a7.8 7.8 0 0110.6 0l37.5 35.7a6.9 6.9 0 010 10.1 7.7 7.7 0 01-5.3 2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.3s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 30; 0 0; 0 -30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.3s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 258a7.7 7.7 0 01-5.3-2L256 225.1 223.8 256a7.8 7.8 0 01-10.6 0 6.9 6.9 0 010-10l37.5-35.8a7.8 7.8 0 0110.6 0l37.5 35.7a6.9 6.9 0 010 10.1 7.7 7.7 0 01-5.3 2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.2s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 30; 0 0; 0 -30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.2s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 303a7.7 7.7 0 01-5.3-2L256 270.1 223.8 301a7.8 7.8 0 01-10.6 0 6.9 6.9 0 010-10l37.5-35.8a7.8 7.8 0 0110.6 0l37.5 35.7a6.9 6.9 0 010 10.1 7.7 7.7 0 01-5.3 2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 30; 0 0; 0 -30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 348a7.7 7.7 0 01-5.3-2L256 315.1 223.8 346a7.8 7.8 0 01-10.6 0 6.9 6.9 0 010-10l37.5-35.8a7.8 7.8 0 0110.6 0l37.5 35.7a6.9 6.9 0 010 10.1 7.7 7.7 0 01-5.3 2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 30; 0 0; 0 -30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                </svg>
+                <svg
+                  id="low-pressure-icon"
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M293.5 298a7.7 7.7 0 00-5.3 2L256 330.9 223.8 300a7.8 7.8 0 00-10.6 0 6.9 6.9 0 000 10l37.5 35.8a7.8 7.8 0 0010.6 0l37.5-35.7a6.9 6.9 0 000-10.1 7.7 7.7 0 00-5.3-2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.3s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 -30; 0 0; 0 30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.3s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 253a7.7 7.7 0 00-5.3 2L256 285.9 223.8 255a7.8 7.8 0 00-10.6 0 6.9 6.9 0 000 10l37.5 35.8a7.8 7.8 0 0010.6 0l37.5-35.7a6.9 6.9 0 000-10.1 7.7 7.7 0 00-5.3-2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.2s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 -30; 0 0; 0 30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.2s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 208a7.7 7.7 0 00-5.3 2L256 240.9 223.8 210a7.8 7.8 0 00-10.6 0 6.9 6.9 0 000 10l37.5 35.8a7.8 7.8 0 0010.6 0l37.5-35.7a6.9 6.9 0 000-10.1 7.7 7.7 0 00-5.3-2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1.1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 -30; 0 0; 0 30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1.1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                  <path
+                    d="M293.5 163a7.7 7.7 0 00-5.3 2L256 195.9 223.8 165a7.8 7.8 0 00-10.6 0 6.9 6.9 0 000 10l37.5 35.8a7.8 7.8 0 0010.6 0l37.5-35.7a6.9 6.9 0 000-10.1 7.7 7.7 0 00-5.3-2.1Z"
+                    fill="rgba(255, 255, 255, 0.6)"
+                    opacity="0"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="-1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      type="translate"
+                      values="0 -30; 0 0; 0 30"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      begin="-1s"
+                      calcMode="spline"
+                      dur="3s"
+                      keySplines=".55, 0, .1, 1; .55, 0, .1, 1"
+                      repeatCount="indefinite"
+                      values="0; 1; 0"
+                    />
+                  </path>
+                </svg>
+                <h1 class="weather-data" id="pressure-value">--</h1>
+              </div>
+            </div>
+          </section>
+          <div class="unit-toggle">
+            <button
+              class="toggle-btn active-toggle"
+              id="celsius-toggle"
+              value="metric"
+            >
+              C
+            </button>
+            <div class="vertical-divider">|</div>
+            <button class="toggle-btn" id="fahrenheit-toggle" value="imperial">
+              F
+            </button>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <p>
+          Inspired by
+          <a
+            href="https://ph.pinterest.com/pin/338544096980540108/"
+            target="_blank"
+          >
+            this design
+          </a>
+          |
+          <a
+            href="https://github.com/Tamagomago/weather-app.git"
+            target="_blank"
+          >
+            Source code on GitHub
+          </a>
+        </p>
+      </footer>
+    </div>
+    <script src="ui-behavior-utils.js"></script>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
